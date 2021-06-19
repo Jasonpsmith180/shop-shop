@@ -18,7 +18,7 @@ const Cart = () => {
   useEffect(() => {
     if (data) {
       stripePromise.then((res) => {
-        res.redirectToCheckout({sessionId: data.checkout.session });
+        res.redirectToCheckout({ sessionId: data.checkout.session })
       })
     }
   }, [data]);
@@ -46,16 +46,6 @@ const Cart = () => {
     return sum.toFixed(2);
   }
 
-  if (!state.cartOpen) {
-    return (
-      <div className="cart-closed" onClick={toggleCart}>
-        <span
-          role="img"
-          aria-label="trash">🛒</span>
-      </div>
-    );
-  }
-
   function submitCheckout() {
     const productIds = [];
 
@@ -68,6 +58,16 @@ const Cart = () => {
     getCheckout({
       variables: { products: productIds }
     });
+  }
+
+  if (!state.cartOpen) {
+    return (
+      <div className="cart-closed" onClick={toggleCart}>
+        <span
+          role="img"
+          aria-label="trash">🛒</span>
+      </div>
+    );
   }
 
   return (
